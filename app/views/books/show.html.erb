@@ -1,0 +1,21 @@
+<%= render 'layouts/list', book: @new_book, user: current_user %>
+<div class="col-md-8 offset-md-1">
+  <h2>Book detail</h2>
+  <table class="table table-hover table-inverse">
+    <tbody>
+      <tr>
+    <td>
+     <div class="image_box">
+        <%= attachment_image_tag current_user, :profile_image, :fill, 50,50, fallback: "no_image.jpg" %>
+        <br><p><%= link_to current_user.name, user_path(current_user.id) %></p>
+      </div>
+    </td>
+      <td><%= @book.title %></td>
+      <td><%= @book.body %></td>
+      <td><%= link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success edit_book_4080' %></td>
+      <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class: 'btn btn-sm btn-danger destroy_book_4080' %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
