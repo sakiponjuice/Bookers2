@@ -1,16 +1,29 @@
 <main>
+  <p id="notice"><%= notice %></p>
   <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
     <h2>User info</h2>
+    <% if @user.errors.any? %>
+      <div class="alert alert-warning">
+        <h3>
+          <%= pluralize(@user.errors.count, "error") %> prohibited this model from being saved:
+        </h3>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
     <%= form_with model:@user, local:true do |f| %>
      <label>Name</label>
-      <div class="form_control"><%= f.text_field :name %></div>
+      <%= f.text_field :name,class: "form-control"%>
     <label>Image</label>
-      <div class="form_control"><%= f.attachment_field :profile_image %></div>
+      <div><%= f.attachment_field :profile_image %></div>
     <label>Introduction</label>
-      <div class="form_control"> <%= f.text_area :introduction %></div>
-      <div class="actions"><%= f.submit 'Update User' %></div>
+       <%= f.text_area :introduction,class: "form-control"%>
+      <div class="actions"><%= f.submit 'Update User',class: "btn btn-secondary" %></div>
     <% end %>
  </div>
 </div>

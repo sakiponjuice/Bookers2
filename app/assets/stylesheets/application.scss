@@ -17,13 +17,9 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
-main {
- margin: 30px auto;
-}
-
 
 .actions {
- padding: 10px 0px ;
+ padding: 15px 0px ;
 }
 
 .edit_button {
@@ -33,4 +29,15 @@ main {
 .image_box{
  display: inline-block;
  text-align:center;
+}
+
+#notice {
+  color:green;
+  font-weight:bold;
+}
+
+
+#error_explanation {
+  color:red;
+  font-weight:bold;
 }

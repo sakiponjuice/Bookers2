@@ -1,4 +1,5 @@
-<%= render 'layouts/list', book: @new_book, user: current_user %>
+<p id="notice"><%= notice %></p>
+<%= render 'layouts/list', book: @new_book, user: @book.user %>
 <div class="col-md-8 offset-md-1">
   <h2>Book detail</h2>
   <table class="table table-hover table-inverse">
@@ -6,14 +7,18 @@
       <tr>
     <td>
      <div class="image_box">
-        <%= attachment_image_tag current_user, :profile_image, :fill, 50,50, fallback: "no_image.jpg" %>
-        <br><p><%= link_to current_user.name, user_path(current_user.id) %></p>
+        <%= link_to user_path(@book.user) do %>
+        <%= attachment_image_tag @book.user, :profile_image, :fill, 40,40, fallback: "no_image_2.jpg" %>
+        <% end %>
+        <br><p><%= link_to @book.user.name, user_path(@book.user) %></p>
       </div>
     </td>
-      <td><%= @book.title %></td>
+      <td><%= link_to @book.title, book_path(@book.id) %></td>
       <td><%= @book.body %></td>
+      <% if current_user==@book.user%>
       <td><%= link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success edit_book_4080' %></td>
-      <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class: 'btn btn-sm btn-danger destroy_book_4080' %></td>
+      <td><%= link_to "Destroy", book_path(@book.id), method: :delete, class: 'btn btn-sm btn-danger destroy_book_4080' ,"data-confirm" => "本当に消しますか？"%></td>
+      <% end %>
       </tr>
     </tbody>
   </table>
