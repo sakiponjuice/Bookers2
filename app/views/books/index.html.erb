@@ -53,6 +53,15 @@
             <th>
               <p><%= link_to "#{book.book_comments.count} コメント", book_path(book.id) %></p>
             </th>
+            <th>
+              <% unless book.user == current_user %>
+                <% if current_user.following?(book.user) %>
+                  <%= link_to 'フォロー外す', unfollow_path(book.user.id), method: :POST %>
+                <% else %>
+                  <%= link_to 'フォローする', follow_path(book.user.id), method: :POST %>
+                <% end %>
+                <% end %>
+            </th>
           </tr>
           <% end %>
         </tbody>

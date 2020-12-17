@@ -35,6 +35,15 @@
               </p>
               <% end %>
             </td>
+            <td>
+              <% unless @book.user == current_user %>
+                <% if current_user.following?(@book.user) %>
+                  <%= link_to 'フォロー外す', unfollow_path(@book.user.id), method: :POST %>
+                <% else %>
+                  <%= link_to 'フォローする', follow_path(@book.user.id), method: :POST %>
+                <% end %>
+              <% end %>
+            </td>
             <% if current_user==@book.user%>
             <td><%= link_to "Edit", edit_book_path(@book.id), class: 'btn btn-sm btn-success edit_book_4080' %></td>
             <td>

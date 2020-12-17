@@ -8,11 +8,16 @@
               <th><%= user.name %></th>
             </tr>
             <tr>
-              <th>introduction</th>
-              <th><%= user.introduction %></th>
+              <th>follows</th>
+              <th><%= link_to user.following_user.count,user_follower_path(user) %></th>
+            </tr>
+            <tr>
+              <th>followers</th>
+              <th><%= link_to user.follower_user.count, user_followed_path(user) %></th>
             </tr>
           </tbody>
         </table>
+        <% if current_user==user %>
         <div class="edit_button">
           <div class="row">
             <%= link_to  edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
@@ -20,6 +25,21 @@
             <% end %>
           </div>
         </div>
+        <% else %>
+          <% if current_user.following?(user) %>
+            <div class="unfollow_button">
+                <%= link_to  unfollow_path(user), method: :POST, class: "btn btn-primary" do %>
+                フォローを外す
+                <% end %>
+            </div>
+          <% else %>
+            <div class="follow_button">
+                <%= link_to  follow_path(user), method: :POST, class: "btn btn-success" do %>
+                フォローする
+                <% end %>
+            </div>
+          <% end %>
+        <% end %>
         <h2>New book</h2>
         <%= form_with model: book, url: books_path, local: true do |f| %>
         <label>Title</label>
