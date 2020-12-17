@@ -25,6 +25,9 @@
             </th>
             <th><%= link_to book.title, book_path(book.id) %></th>
             <th><%= book.body %></th>
+            <th>
+              <p><%= link_to "#{book.book_comments.count} コメント", book_path(book.id) %></p>
+            </th>
           </tr>
           <% end %>
         </tbody>
