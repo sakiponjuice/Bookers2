@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   resources :users, only: :show
   get 'users/:id/follower' => 'users#follower', as: 'user_follower'
   get 'users/:id/followed' => 'users#followed', as: 'user_followed'
+  get 'search/search' => 'search#search', as: 'search'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
