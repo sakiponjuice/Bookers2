@@ -11,28 +11,45 @@
 // about supported directives.
 //
 //= require jquery
-//= require rails-ujs
+//= require jquery_ujs
 //= require activestorage
 //= require turbolinks
+//= require jquery.jpostal
 //= require_tree .
+
 $(document).on('turbolinks:load', function () {
-  $('.jquery').on('click', function(){
-    $(this).css('color','red');
+  $('.jquery').on('click', function () {
+    $(this).css('color', 'red');
   });
 });
 
 
-$(document).on('turbolinks:load',function () {
+$(document).on('turbolinks:load', function () {
   $("#theTarget").skippr({
-    transition : 'slide',
-    speed : 1000,
-    easing : 'easeOutQuart',
-    navType : 'block',
-    childrenElementType : 'div',
-    arrows : true,
-    autoPlay : true,
-    autoPlayDuration : 3000,
-    keyboardOnAlways : true,
-    hidePrevious : false
+    transition: 'slide',
+    speed: 1000,
+    easing: 'easeOutQuart',
+    navType: 'block',
+    childrenElementType: 'div',
+    arrows: true,
+    autoPlay: true,
+    autoPlayDuration: 3000,
+    keyboardOnAlways: true,
+    hidePrevious: false
+  });
+});
+
+$(function () {
+  $(document).on('turbolinks:load', () => {
+    $('#user_postal_code').jpostal({
+      postcode: [
+        '#user_postal_code'
+      ],
+      address: {
+        "#user_prefecture_code": "%3",
+        "#user_city": "%4%5",
+        "#user_street": "%6%7"
+      }
+    });
   });
 });
