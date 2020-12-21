@@ -1,53 +1,54 @@
 <% if user_signed_in? %>
-        <h2>User info</h2>
-        <table class="table">
-          <tbody>
-            <tr><%= attachment_image_tag user, :profile_image, :fill, 50,50, fallback: "no_image.jpg" %></tr>
-            <tr>
-              <th>name</th>
-              <th><%= user.name %></th>
-            </tr>
-            <tr>
-              <th>follows</th>
-              <th><%= link_to user.following_user.count,user_follower_path(user) %></th>
-            </tr>
-            <tr>
-              <th>followers</th>
-              <th><%= link_to user.follower_user.count, user_followed_path(user) %></th>
-            </tr>
-          </tbody>
-        </table>
-        <% if current_user==user %>
-        <div class="edit_button">
-          <div class="row">
-            <%= link_to  edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
-            <i class="fas fa-user-cog edit_user_4043"></i>
-            <% end %>
-          </div>
-        </div>
-        <% else %>
-          <% if current_user.following?(user) %>
-            <div class="unfollow_button">
-                <%= link_to  unfollow_path(user), method: :POST, class: "btn btn-primary" do %>
-                フォローを外す
-                <% end %>
-            </div>
-          <% else %>
-            <div class="follow_button">
-                <%= link_to  follow_path(user), method: :POST, class: "btn btn-success" do %>
-                フォローする
-                <% end %>
-            </div>
-          <% end %>
-        <% end %>
-        <h2>New book</h2>
-        <%= form_with model: book, url: books_path, local: true do |f| %>
-        <label>Title</label>
-        <%= f.text_field :title,class: "form-control" %>
-        <label>Opinion</label>
-        <%= f.text_area :body,class: "form-control" %>
-        <div class="actions"><%= f.submit "Create Book" ,class: "btn btn-success"%></div>
-        <% end %>
+<h2>User info</h2>
+<table class="table">
+  <tbody>
+    <tr><%= attachment_image_tag user, :profile_image, :fill, 50,50, fallback: "no_image.jpg" %></tr>
+    <tr>
+      <th>name</th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+      <th>follows</th>
+      <th><%= link_to user.following_user.count,user_follower_path(user) %></th>
+    </tr>
+    <tr>
+      <th>followers</th>
+      <th><%= link_to user.follower_user.count, user_followed_path(user) %></th>
+    </tr>
+  </tbody>
+</table>
+<% if current_user==user %>
+<div class="edit_button">
+  <div class="row">
+    <%= link_to  edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
+    <i class="fas fa-user-cog edit_user_4043"></i>
+    <% end %>
+  </div>
+</div>
+<% else %>
+<%= link_to 'チャットする', chat_path(user.id) %>
+<% if current_user.following?(user) %>
+<div class="unfollow_button">
+  <%= link_to  unfollow_path(user), method: :POST, class: "btn btn-primary" do %>
+  フォローを外す
+  <% end %>
+</div>
+<% else %>
+<div class="follow_button">
+  <%= link_to  follow_path(user), method: :POST, class: "btn btn-success" do %>
+  フォローする
+  <% end %>
+</div>
+<% end %>
+<% end %>
+<h2>New book</h2>
+<%= form_with model: book, url: books_path, local: true do |f| %>
+<label>Title</label>
+<%= f.text_field :title,class: "form-control" %>
+<label>Opinion</label>
+<%= f.text_area :body,class: "form-control" %>
+<div class="actions"><%= f.submit "Create Book" ,class: "btn btn-success"%></div>
+<% end %>
 
 
 <% end %>
